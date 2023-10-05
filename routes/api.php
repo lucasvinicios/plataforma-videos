@@ -20,8 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('videos', 'App\Http\Controllers\VideosController');
-Route::apiResource('categorias', 'App\Http\Controllers\CategoriasController');
+Route::get('videos/free', [VideosController::class, 'showQuantityVideos'])->withoutMiddleware('auth:sanctum');
+Route::get('videos/search', [VideosController::class, 'showByTitle'])->middleware('auth:sanctum');
+Route::apiResource('videos', 'App\Http\Controllers\VideosController')->middleware('auth:sanctum');
+Route::apiResource('categorias', 'App\Http\Controllers\CategoriasController')->middleware('auth:sanctum');
 
-Route::get('categorias/{id}/videos', [CategoriasController::class, 'showVideosToCategory']);
-Route::get('videos/', [VideosController::class, 'showByTitle']);
+Route::get('categorias/{id}/videos', [CategoriasController::class, 'showVideosToCategory'])->middleware('auth:sanctum');
+Route::any('/login', [App\Http\Controllers\LoginController::class, 'auth'])->name('login');

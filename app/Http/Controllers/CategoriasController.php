@@ -12,11 +12,24 @@ class CategoriasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Categoria::all();
+        $itensPorPagina = 5;
 
-        return response()->json(['data' => $data]);
+        $pagina = $request->query('page', 1);
+
+        $categorias = Categoria::paginate($itensPorPagina, ['*'], 'page', $pagina);
+
+        $numeroDePaginas = $categorias->lastPage();
+
+        if ($numeroDePaginas < $pagina)
+        {
+            return response()->json(['message' => 'O total de itens não corresponde a página que você procura!']);
+        }
+
+        return response()->json(['data' => $categorias,
+        'message' => 'Success!'
+   ]);
     }
 
     /**

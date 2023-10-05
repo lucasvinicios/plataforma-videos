@@ -25,4 +25,13 @@ class CategoriaFactory extends Factory
             'cor' => fake()->colorName()
         ];
     }
+
+    public function configure()
+    {
+        return $this->afterCreating(function ($categoria) {
+            return [
+                'categoria_id' => $categoria->id,
+            ];
+        });
+    }
 }

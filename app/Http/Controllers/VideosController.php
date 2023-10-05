@@ -117,4 +117,10 @@ class VideosController extends Controller
         return response()->json(['message' => 'Video(s) não encontrado(s)!']);
     }
 
+    public function showQuantityVideos(){
+        $videos = Video::count();
+
+        return response()->json(['quantidade_videos' => $videos], 200);
+    }
+
 }
