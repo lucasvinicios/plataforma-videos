@@ -30,8 +30,8 @@ class VideoRequest extends FormRequest
         return [
             'titulo' => 'required|min:10|max:100',
             'descricao' => 'required|min:10|max:255',
-            'url' => 'required',
-            'categoria_id' => ''
+            'url' => 'required|url',
+            'categoria_id' => 'required'
         ];
     }
 

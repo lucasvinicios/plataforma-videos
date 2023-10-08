@@ -78,9 +78,10 @@ class VideosController extends Controller
         $video = Video::find($id);
 
         if ($video) {
-           $video->update(['titulo' => $request->titulo,
-                            'descricao' => $request->descricao,
-                            'url' => $request->url
+           $video->update(['titulo' => $request->titulo ? $request->titulo : $video->titulo,
+                           'descricao' => $request->descricao ? $request->descricao : $video->descricao,
+                           'url' => $request->url ? $request->url : $video->url,
+                           'categoria_id' => $request->categoria_id ? $request->categoria_id : $video->categoria_id
         ]);
             return response()->json(['video' => $video,
                                     'message' => 'Video atualizado com sucesso!']);
@@ -106,7 +107,7 @@ class VideosController extends Controller
      */
     public function showByTitle(Request $request)
     {
-        $searchItem = $request->input('search');
+        $searchItem = $request->input('titulo');
 
         $videos = Video::where('titulo', 'like', '%' . $searchItem . '%')->get();
 
