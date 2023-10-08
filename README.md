@@ -1,5 +1,5 @@
 
-# Plataforma de Compartilhamento de Vídeos
+# Plataforma de Vídeos
 
 Este é o repositório principal da plataforma de compartilhamento de vídeos. A plataforma permite aos usuários criar categorias personalizadas, organizando seus vídeos favoritos em categorias específicas. Ela foi projetada com foco na experiência do usuário (UX/UI) e implementada com as melhores práticas de desenvolvimento web usando o framework Laravel.
 
